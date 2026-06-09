@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IPRE — Institut für immobilienwirtschaftliche Forschung</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   TOKENS
+   ============================================= */
+:root {
+  --c-black:        #0a0a09;
+  --c-white:        #fafaf8;
+  --c-cream:        #f5f2ec;
+  --c-stone:        #e8e3da;
+  --c-mid:          #8c8880;
+  --c-accent:       #2a4a3e;
+  --c-accent-light: #3d6b5a;
+  --c-accent-dim:   rgba(42,74,62,0.12);
+  --c-text:         #1a1a18;
+  --c-muted:        #6b6860;
+  --nav-h:          68px;
+  --ease:           cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: var(--c-white); color: var(--c-text); overflow-x: hidden; }
+body.lang-de [data-lang="en"] { display: none; }
+body.lang-en [data-lang="de"] { display: none; }
+
+/* =============================================
+   NAVIGATION
+   ============================================= */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h); z-index: 1000;
+  background: rgba(10,10,9,0.85);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; padding: 0 40px;
+  transition: background 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
+  color: var(--c-white); letter-spacing: -0.01em; text-decoration: none; flex-shrink: 0;
+}
+.nav-logo span { color: var(--c-accent-light); }
+.nav-links { display: flex; align-items: center; gap: 2px; margin: 0 auto; list-style: none; }
+.nav-links a {
+  display: block; padding: 8px 15px; font-size: 13.5px; font-weight: 400;
+  color: rgba(255,255,255,0.6); text-decoration: none; border-radius: 100px;
+  transition: color 0.2s, background 0.2s; letter-spacing: 0.01em;
+}
+.nav-links a:hover { color: var(--c-white); background: rgba(255,255,255,0.08); }
+.nav-links a.active { color: var(--c-white); }
+.nav-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.lang-toggle { display: flex; background: rgba(255,255,255,0.08); border-radius: 100px; overflow: hidden; }
+.lang-btn {
+  padding: 5px 11px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5);
+  background: none; border: none; cursor: pointer; letter-spacing: 0.04em;
+  transition: color 0.2s, background 0.2s; border-radius: 100px;
+}
+.lang-btn.active { color: var(--c-white); background: rgba(255,255,255,0.15); }
+.nav-cta {
+  padding: 8px 18px; font-size: 13px; font-weight: 500; color: var(--c-white);
+  background: var(--c-accent); border: none; border-radius: 100px; cursor: pointer;
+  text-decoration: none; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--c-accent-light); }
+.nav-hamburger {
+  display: none; flex-direction: column; gap: 5px; background: none;
+  border: none; cursor: pointer; padding: 4px; margin-left: auto;
+}
+.nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--c-white); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; }
+.nav-drawer {
+  position: fixed; top: var(--nav-h); right: 0; left: 0; bottom: 0;
+  background: rgba(10,10,9,0.97); z-index: 999; padding: 40px;
+  display: flex; flex-direction: column; gap: 4px;
+  transform: translateX(100%); transition: transform 0.35s var(--ease);
+  pointer-events: none;
+  visibility: hidden;
+}
+.nav-drawer.open { transform: translateX(0); pointer-events: auto; visibility: visible; }
+.nav-drawer a {
+  font-family: 'Playfair Display', serif; font-size: 30px; color: var(--c-white);
+  text-decoration: none; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+  opacity: 0.8; transition: opacity 0.2s;
+}
+.nav-drawer a:hover { opacity: 1; }
+.drawer-lang { display: flex; gap: 12px; margin-top: 28px; }
+.drawer-lang button {
+  font-size: 14px; color: rgba(255,255,255,0.5); background: none;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 8px 20px; cursor: pointer;
+}
+.drawer-lang button.active { color: var(--c-white); border-color: rgba(255,255,255,0.4); }
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero {
+  position: relative; height: 100vh; min-height: 600px;
+  background: var(--c-black); display: flex; align-items: center;
+  justify-content: center; overflow: hidden;
+}
+.hero-mesh {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 50%, rgba(42,74,62,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 80% at 80% 30%, rgba(42,74,62,0.2) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 60% 80%, rgba(61,107,90,0.15) 0%, transparent 50%);
+  animation: meshFloat 14s ease-in-out infinite alternate;
+}
+@keyframes meshFloat {
+  0%   { transform: scale(1) translate(0,0); }
+  50%  { transform: scale(1.05) translate(-14px, 9px); }
+  100% { transform: scale(1.02) translate(9px, -5px); }
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+/* Hero image strip */
+.hero-images {
+  position: absolute; inset: 0; display: flex; opacity: 0.18;
+  pointer-events: none; overflow: hidden;
+}
+.hero-img-panel {
+  flex: 1; background-size: cover; background-position: center;
+  filter: grayscale(60%);
+  transition: opacity 0.3s;
+}
+.hero-content {
+  position: relative; z-index: 2; text-align: center; padding: 0 24px;
+}
+.hero-eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase; color: var(--c-accent-light);
+  border: 1px solid rgba(61,107,90,0.4); border-radius: 100px;
+  padding: 6px 16px; margin-bottom: 32px;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(72px, 13vw, 160px);
+  font-weight: 700; color: var(--c-white); line-height: 0.88;
+  letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.hero-title em { font-style: italic; color: var(--c-accent-light); }
+.hero-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(15px, 2.2vw, 22px);
+  font-weight: 400; font-style: italic;
+  color: rgba(255,255,255,0.42); margin-bottom: 40px; letter-spacing: 0.01em;
+  max-width: 640px; margin-left: auto; margin-right: auto;
+}
+.hero-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.hero-tag {
+  padding: 8px 20px; font-size: 13px; color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.12); border-radius: 100px;
+  cursor: pointer; text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.hero-tag:hover { color: var(--c-white); border-color: var(--c-accent-light); background: rgba(42,74,62,0.2); }
+.hero-scroll {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; z-index: 2;
+}
+.hero-scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.3));
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.8; transform: scaleY(1.2); }
+}
+
+/* =============================================
+   SHARED SECTION
+   ============================================= */
+.section { padding: 100px 0; }
+.section-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+.section-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 24px; }
+.eyebrow-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-accent); flex-shrink: 0; }
+.eyebrow-label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); }
+.section-header { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+.section-h2 { font-family: 'Playfair Display', serif; font-size: clamp(30px, 3.8vw, 50px); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--c-text); }
+.section-h2 em { font-style: italic; color: var(--c-accent); }
+.section-desc { font-size: 16px; line-height: 1.7; color: var(--c-muted); max-width: 440px; }
+.section-more { display: inline-flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; color: var(--c-accent); text-decoration: none; margin-top: 20px; transition: gap 0.2s; }
+.section-more:hover { gap: 10px; }
+.section-more::after { content: '→'; }
+.section-divider { height: 1px; background: linear-gradient(to right, transparent, var(--c-stone), transparent); margin: 0 40px; }
+
+/* =============================================
+   GALLERY
+   ============================================= */
+
+/* Prevent fixed nav from obscuring section anchors */
+#ai, #realestate, #learning, #about { scroll-margin-top: var(--nav-h); }
+
+.gallery-wrap { position: relative; overflow: hidden; }
+.gallery-track {
+  display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none; -ms-overflow-style: none; padding-bottom: 4px; cursor: grab;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery-track::-webkit-scrollbar { display: none; }
+.gallery-track.is-dragging { cursor: grabbing; user-select: none; }
+.gallery-wrap::after {
+  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 100px;
+  background: linear-gradient(to right, transparent, var(--section-bg, var(--c-white)));
+  pointer-events: none; z-index: 2;
+}
+
+/* PROJECT CARD */
+.project-card {
+  flex: 0 0 340px; scroll-snap-align: start; background: var(--c-white);
+  border: 1px solid var(--c-stone); border-radius: 12px; overflow: hidden;
+  opacity: 0; transform: translateY(24px);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), opacity 0.6s var(--ease);
+  will-change: transform, opacity;
+}
+.project-card.is-visible { opacity: 1; transform: translateY(0); }
+.project-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); }
+
+.card-image {
+  height: 200px; position: relative; overflow: hidden;
+}
+/* Fallback gradient is always the background of .card-image */
+.card-image img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  display: block; z-index: 1;
+  transition: transform 0.6s var(--ease), opacity 0.4s ease;
+  will-change: transform;
+}
+.project-card:hover .card-image img { transform: scale(1.05); }
+.card-image-fallback {
+  position: absolute; inset: 0; z-index: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px; opacity: 0.35;
+}
+/* Fallback gradients — always visible behind img */
+.grad-ai     { background: linear-gradient(135deg, #0f1f1a 0%, #1a3830 40%, #2a4a3e 100%); }
+.grad-re     { background: linear-gradient(135deg, #1a1208 0%, #332416 40%, #4a3420 100%); }
+.grad-learn  { background: linear-gradient(135deg, #0a0f1f 0%, #142038 40%, #1e3454 100%); }
+
+.card-status {
+  position: absolute; top: 14px; left: 14px; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em; padding: 4px 10px; border-radius: 100px; z-index: 2;
+}
+.status-active { background: rgba(42,74,62,0.9); color: #a8d5c2; }
+.status-future { background: rgba(30,52,84,0.9); color: #a8c4e0; }
+.status-done   { background: rgba(40,40,38,0.85); color: #b0ada8; }
+.card-year { position: absolute; bottom: 14px; right: 14px; font-size: 11px; color: rgba(255,255,255,0.45); z-index: 2; font-weight: 300; }
+
+.card-body { padding: 24px; }
+.card-category { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 10px; }
+.card-title { font-family: 'Playfair Display', serif; font-size: 19px; font-weight: 700; line-height: 1.25; color: var(--c-text); margin-bottom: 10px; letter-spacing: -0.01em; }
+.card-abstract { font-size: 14px; line-height: 1.6; color: var(--c-muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.card-footer { padding: 16px 24px; border-top: 1px solid var(--c-stone); display: flex; align-items: center; justify-content: space-between; background: var(--c-cream); }
+.card-pi { font-size: 12px; color: var(--c-muted); }
+.card-pi strong { color: var(--c-text); font-weight: 500; }
+.card-arrow { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--c-stone); display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--c-accent); transition: background 0.2s, border-color 0.2s; }
+.project-card:hover .card-arrow { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-white); }
+
+.gallery-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; }
+.gallery-dots { display: flex; gap: 6px; }
+.gallery-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c-stone); cursor: pointer; transition: background 0.2s, width 0.3s; border: none; }
+.gallery-dot.active { width: 24px; border-radius: 3px; background: var(--c-accent); }
+.gallery-arrows { display: flex; gap: 8px; }
+.gallery-arr { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--c-stone); background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--c-text); transition: background 0.2s, border-color 0.2s, color 0.2s; }
+.gallery-arr:hover { background: var(--c-accent); border-color: var(--c-accent); color: var(--c-white); }
+
+/* =============================================
+   SECTION THEMES
+   ============================================= */
+#ai { background: var(--c-white); --section-bg: var(--c-white); padding-top: 120px; }
+
+#realestate { background: var(--c-cream); --section-bg: var(--c-cream); }
+#realestate .project-card { background: var(--c-white); }
+#realestate .card-footer { background: var(--c-stone); }
+
+#learning { background: var(--c-black); --section-bg: var(--c-black); }
+#learning .section-h2 { color: var(--c-white); }
+#learning .eyebrow-label { color: #7fc4a8; }
+#learning .eyebrow-dot  { background: #7fc4a8; }
+#learning .section-desc { color: rgba(255,255,255,0.45); }
+#learning .section-more { color: #7fc4a8; }
+#learning .project-card { background: #141413; border-color: rgba(255,255,255,0.08); }
+#learning .card-category { color: #7fc4a8; }
+#learning .card-title    { color: var(--c-white); }
+#learning .card-abstract { color: rgba(255,255,255,0.45); }
+#learning .card-footer   { background: #0f0f0e; border-color: rgba(255,255,255,0.08); }
+#learning .card-pi       { color: rgba(255,255,255,0.35); }
+#learning .card-pi strong { color: rgba(255,255,255,0.7); }
+#learning .card-arrow    { border-color: rgba(255,255,255,0.12); color: #7fc4a8; }
+#learning .project-card:hover .card-arrow { background: #7fc4a8; border-color: #7fc4a8; color: var(--c-black); }
+#learning .gallery-arr   { border-color: rgba(255,255,255,0.12); color: var(--c-white); }
+#learning .gallery-arr:hover { background: #7fc4a8; border-color: #7fc4a8; color: var(--c-black); }
+#learning .gallery-dot   { background: rgba(255,255,255,0.15); }
+#learning .gallery-dot.active { background: #7fc4a8; }
+#learning .gallery-wrap::after { background: linear-gradient(to right, transparent, var(--c-black)); }
+
+/* =============================================
+   ÜBER IPRE
+   ============================================= */
+#about { background: var(--c-white); padding: 120px 0; }
+.about-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--c-stone); margin-bottom: 64px; overflow-x: auto; scrollbar-width: none; }
+.about-tabs::-webkit-scrollbar { display: none; }
+.about-tab { padding: 14px 24px; font-size: 14px; font-weight: 500; color: var(--c-muted); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; margin-bottom: -1px; transition: color 0.2s, border-color 0.2s; }
+.about-tab.active { color: var(--c-accent); border-bottom-color: var(--c-accent); }
+.about-tab:hover { color: var(--c-text); }
+.about-panel { display: none; }
+.about-panel.active { display: block; }
+
+/* TEAM */
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 20px; }
+.team-card {
+  padding: 26px 22px; border: 1px solid var(--c-stone); border-radius: 12px;
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), box-shadow 0.3s, border-color 0.3s;
+}
+.team-card.is-visible { opacity: 1; transform: translateY(0); }
+.team-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.08); border-color: var(--c-mid); }
+.team-avatar-wrap { width: 52px; height: 52px; border-radius: 50%; overflow: hidden; margin-bottom: 16px; background: var(--c-accent-dim); }
+.team-avatar-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.team-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--c-accent-dim); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--c-accent); margin-bottom: 16px; letter-spacing: -0.02em; }
+.team-name { font-size: 14px; font-weight: 600; color: var(--c-text); margin-bottom: 4px; line-height: 1.3; }
+.team-title { font-size: 12.5px; color: var(--c-muted); line-height: 1.4; margin-bottom: 12px; }
+.team-focus { font-size: 11.5px; color: var(--c-accent); background: var(--c-accent-dim); padding: 4px 10px; border-radius: 100px; display: inline-block; }
+
+/* NEWS */
+.news-list { display: flex; flex-direction: column; }
+.news-item { display: grid; grid-template-columns: 110px 1fr auto; gap: 24px; align-items: start; padding: 28px 0; border-bottom: 1px solid var(--c-stone); opacity: 0; transform: translateY(16px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+.news-item.is-visible { opacity: 1; transform: translateY(0); }
+.news-thumb { width: 90px; height: 60px; border-radius: 6px; object-fit: cover; display: block; background: var(--c-stone); }
+.news-date { font-size: 12px; font-weight: 500; color: var(--c-muted); letter-spacing: 0.04em; padding-top: 2px; display: flex; flex-direction: column; gap: 10px; }
+.news-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--c-text); margin-bottom: 6px; line-height: 1.3; }
+.news-body { font-size: 14px; color: var(--c-muted); line-height: 1.6; }
+.news-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 100px; background: var(--c-cream); color: var(--c-muted); white-space: nowrap; align-self: start; }
+
+/* TIMELINE */
+.timeline { position: relative; padding-left: 40px; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: var(--c-stone); }
+.timeline-item { position: relative; padding-bottom: 48px; opacity: 0; transform: translateX(-16px); transition: opacity 0.5s var(--ease), transform 0.5s var(--ease); }
+.timeline-item.is-visible { opacity: 1; transform: translateX(0); }
+.timeline-item::before { content: ''; position: absolute; left: -44px; top: 7px; width: 8px; height: 8px; border-radius: 50%; background: var(--c-accent); border: 2px solid var(--c-white); box-shadow: 0 0 0 2px var(--c-stone); }
+.timeline-year { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--c-accent); margin-bottom: 6px; }
+.timeline-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--c-text); margin-bottom: 8px; }
+.timeline-text { font-size: 14px; color: var(--c-muted); line-height: 1.65; max-width: 560px; }
+
+/* IMPRESSUM */
+.impressum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; }
+.impressum-label { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c-accent); margin-bottom: 16px; }
+.impressum-text { font-size: 15px; color: var(--c-text); line-height: 1.75; }
+.impressum-text a { color: var(--c-accent); text-decoration: none; }
+.impressum-text a:hover { text-decoration: underline; }
+
+/* =============================================
+   CTA
+   ============================================= */
+.cta-section { background: var(--c-accent); padding: 100px 0; text-align: center; }
+.cta-section .section-inner { max-width: 640px; }
+.cta-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+.cta-h2 { font-family: 'Playfair Display', serif; font-size: clamp(30px, 5vw, 50px); font-weight: 700; color: var(--c-white); line-height: 1.15; margin-bottom: 20px; letter-spacing: -0.02em; }
+.cta-h2 em { font-style: italic; color: rgba(255,255,255,0.65); }
+.cta-sub { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 40px; line-height: 1.6; }
+.btn-white { display: inline-block; padding: 14px 32px; background: var(--c-white); color: var(--c-accent); font-size: 14px; font-weight: 600; border-radius: 100px; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+.btn-white:hover { background: var(--c-cream); transform: translateY(-1px); }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer { background: var(--c-black); padding: 60px 0 40px; border-top: 1px solid rgba(255,255,255,0.06); }
+.footer-inner { max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+.footer-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 40px; margin-bottom: 48px; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: var(--c-white); }
+.footer-logo span { color: var(--c-accent-light); }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+.footer-cols { display: flex; gap: 56px; }
+.footer-col h4 { font-size: 11.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 16px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul a { font-size: 14px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--c-white); }
+.footer-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.06); gap: 16px; }
+.footer-copy { font-size: 13px; color: rgba(255,255,255,0.25); }
+.footer-social { display: flex; gap: 16px; }
+.footer-social a { font-size: 13px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: rgba(255,255,255,0.7); }
+
+/* =============================================
+   SCROLL REVEAL
+   ============================================= */
+.reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 900px) {
+  .section-header { grid-template-columns: 1fr; gap: 20px; }
+  .section-desc { max-width: 100%; }
+  .impressum-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-top { flex-direction: column; }
+  .footer-cols { gap: 32px; }
+  .news-item { grid-template-columns: 80px 1fr; }
+  .news-item > .news-tag { display: none; }
+}
+@media (max-width: 680px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-right { display: none !important; }
+  .nav-hamburger { display: flex; }
+  /* drawer is always flex, hidden via visibility/transform */
+  .section-inner { padding: 0 20px; }
+  .section { padding: 64px 0; }
+  #about { padding: 64px 0 !important; }
+  .cta-section { padding: 64px 0; }
+  #ai { padding-top: 88px; }
+  .project-card { flex: 0 0 82vw; max-width: 320px; }
+  .team-grid { grid-template-columns: 1fr 1fr; }
+  .footer-inner { padding: 0 20px; }
+  .footer-cols { flex-direction: column; gap: 24px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .section-divider { margin: 0 20px; }
+  .about-tab { padding: 12px 14px; font-size: 13px; }
+  .news-item { grid-template-columns: 1fr; gap: 8px; }
+  .news-thumb { display: none; }
+  /* Hero: fix 100vh on mobile Safari (address bar) */
+  .hero { height: 100svh; min-height: 560px; }
+  .hero-title { font-size: clamp(64px, 20vw, 120px); }
+  /* Disable parallax jank on mobile */
+  .hero-content { will-change: auto !important; }
+  /* Gallery: wider touch target */
+  .gallery-wrap { touch-action: pan-y; }
+  .gallery-track { padding-bottom: 8px; touch-action: pan-x pan-y; }
+  /* Reduce animation distance on small screens */
+  .reveal { transform: translateY(18px); }
+  .project-card { transform: translateY(14px); }
+  /* Team cards full-readable */
+  .team-avatar-wrap, .team-avatar { width: 44px; height: 44px; }
+  /* CTA inner width */
+  .cta-section .section-inner { padding: 0 24px; }
+}
+@media (max-width: 400px) {
+  .team-grid { grid-template-columns: 1fr; }
+  .project-card { flex: 0 0 88vw; }
+  .hero-subtitle { font-size: 14px; }
+}
+</style>
+</head>
+<body class="lang-de">
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="javascript:void(0)" onclick="navTo('hero')" class="nav-logo">IPRE<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="javascript:void(0)" onclick="navTo('ai')">AI</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('realestate')">Immobilien</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('learning')">Learning</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('about')">Über IPRE</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="javascript:void(0)" onclick="navTo('about')" class="nav-cta">Kontakt</a>
+  </div>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menü öffnen" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer">
+  <a href="javascript:void(0)" onclick="drawerNav('ai')">AI</a>
+  <a href="javascript:void(0)" onclick="drawerNav('realestate')">Immobilien</a>
+  <a href="javascript:void(0)" onclick="drawerNav('learning')">Learning</a>
+  <a href="javascript:void(0)" onclick="drawerNav('about')">Über IPRE</a>
+  <div class="drawer-lang">
+    <button class="active" onclick="setLang('de'); closeDrawer()">DE</button>
+    <button onclick="setLang('en'); closeDrawer()">EN</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-mesh"></div>
+  <div class="hero-grid"></div>
+  <!-- Bildstreifen aus bestehenden IPRE-Fotos -->
+  <div class="hero-images">
+    <div class="hero-img-panel" style="background-image:url('https://ipre.at/wp-content/uploads/2026/01/10-IPRE-AI-cut.png')"></div>
+    <div class="hero-img-panel" style="background-image:url('https://ipre.at/wp-content/uploads/2025/05/Waldkunst_Workshop_Tongesicht_TB_22-360x240.jpg')"></div>
+    <div class="hero-img-panel" style="background-image:url('https://ipre.at/wp-content/uploads/2024/10/20ERES_Wien-1-360x240.png')"></div>
+    <div class="hero-img-panel" style="background-image:url('https://ipre.at/wp-content/uploads/2025/11/GrafikWeb2.jpg')"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span data-lang="de">Institut für immobilienwirtschaftliche Forschung · Wien</span>
+      <span data-lang="en">Institute of Property Research · Vienna</span>
+    </div>
+    <h1 class="hero-title">IPRE</h1>
+    <p class="hero-subtitle">
+      <span data-lang="de">Neue Perspektiven für die Immobilienbranche — Wissenstransfer zwischen Forschung und Wirtschaft.</span>
+      <span data-lang="en">New perspectives for the real estate industry — knowledge transfer between research and practice.</span>
+    </p>
+    <div class="hero-tags">
+      <a href="javascript:void(0)" onclick="navTo('ai')" class="hero-tag">AI &amp; Digitalisierung</a>
+      <a href="javascript:void(0)" onclick="navTo('realestate')" class="hero-tag">Immobilienwirtschaft</a>
+      <a href="javascript:void(0)" onclick="navTo('learning')" class="hero-tag">Learning &amp; Transfer</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span>Scrollen</span>
+  </div>
+</section>
+
+<!-- ==============================================
+     AI
+     ============================================== -->
+<section class="section" id="ai">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-label">Forschungsbereich · AI &amp; Digitalisierung</span>
+    </div>
+    <div class="section-header">
+      <div class="reveal reveal-delay-1">
+        <h2 class="section-h2">
+          <span data-lang="de">KI verändert<br>den <em>gebauten Raum.</em></span>
+          <span data-lang="en">AI transforms<br>the <em>built environment.</em></span>
+        </h2>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p class="section-desc">
+          <span data-lang="de">IPRE untersucht, wie generative KI, algorithmische Systeme und digitale Plattformen die Immobilienwirtschaft, kreative Praxis und Stadtentwicklung neu gestalten.</span>
+          <span data-lang="en">IPRE investigates how generative AI, algorithmic systems and digital platforms are reshaping real estate, creative practice and urban development.</span>
+        </p>
+        <a href="https://ipre.at/ai" target="_blank" class="section-more">
+          <span data-lang="de">Alle AI-Themen</span>
+          <span data-lang="en">All AI topics</span>
+        </a>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery-track" id="gallery-ai">
+
+        <!-- Card 1: AI Symposium 2026 -->
+        <div class="project-card">
+          <div class="card-image grad-ai">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKsoTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5BSSBTeW1wb3NpdW08L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNhOGQ1YzIiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+MjAyNjwvdGV4dD4KPC9zdmc+" alt="AI Symposium 2026">
+            <div class="card-image-fallback">⬡</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">Jän. 2026</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">AI · Symposium · TU Wien</div>
+            <div class="card-title">Future of Creative Industries and IP in the Age of AI</div>
+            <p class="card-abstract">
+              <span data-lang="de">Symposium zum 10-Jahres-Jubiläum von IPRE im Kuppelsaal der TU Wien. Forscher:innen und Praktiker:innen diskutierten Chancen und Risiken von KI für kreative Berufe und geistiges Eigentum.</span>
+              <span data-lang="en">Symposium marking IPRE's 10th anniversary at TU Wien's Kuppelsaal. Researchers and practitioners discussed AI's opportunities and challenges for creative industries and intellectual property.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Leitung</span><span data-lang="en">Lead</span>: <strong>Wiegand · Sommer</strong></div>
+            <a href="https://ipre.at/future-of-creative-industries-and-ip-in-the-age-of-ai/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 2: AI Review / Recap -->
+        <div class="project-card">
+          <div class="card-image grad-ai">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXiDwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5BSSBSZXZpZXc8L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNhOGQ1YzIiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+MjAyNDwvdGV4dD4KPC9zdmc+" alt="AI Review">
+            <div class="card-image-fallback">◈</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2024</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">AI · Review · Recap</div>
+            <div class="card-title">
+              <span data-lang="de">IPRE AI Review — Jahresrückblick KI</span>
+              <span data-lang="en">IPRE AI Review — Annual AI Recap</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Jährliche Übersicht zu relevanten KI-Entwicklungen für die Immobilienwirtschaft. Analyse von Tools, Plattformen und regulatorischen Entwicklungen im DACH-Raum.</span>
+              <span data-lang="en">Annual overview of relevant AI developments for the real estate industry. Analysis of tools, platforms and regulatory developments in the DACH region.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Hrsg.</span><span data-lang="en">Ed.</span>: <strong>IPRE Research</strong></div>
+            <a href="https://ipre.at/ai-recap/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 3: AI allgemein / IOG -->
+        <div class="project-card">
+          <div class="card-image grad-ai">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXiTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5LSSBHb3Zlcm5hbmNlPC90ZXh0PgogIDx0ZXh0IHg9IjE3MCIgeT0iMTI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEzIiBmaWxsPSIjYThkNWMyIiBvcGFjaXR5PSIwLjciIGZvbnQtZmFtaWx5PSJETSBTYW5zLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI1MDAiPiYgU3RhbmRhcmRzPC90ZXh0Pgo8L3N2Zz4=" alt="IOG">
+            <div class="card-image-fallback">◉</div>
+            <span class="card-status status-active">
+              <span data-lang="de">Laufend</span><span data-lang="en">Active</span>
+            </span>
+            <span class="card-year">2024–</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">AI · Innovation · Governance</div>
+            <div class="card-title">
+              <span data-lang="de">KI in der Immobilienwirtschaft — Governance &amp; Standards</span>
+              <span data-lang="en">AI in Real Estate — Governance &amp; Standards</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Untersuchung von Governance-Rahmen für den verantwortungsvollen KI-Einsatz in der Immobilienwirtschaft. Vereinbarkeit algorithischer Bewertungsverfahren mit bestehenden Normen.</span>
+              <span data-lang="en">Examination of governance frameworks for responsible AI use in real estate. Compatibility of algorithmic valuation methods with existing standards.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Projekt</span><span data-lang="en">Project</span>: <strong>IPRE · TU Wien</strong></div>
+            <a href="https://ipre.at/iog" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 4: AI Symposium Videos -->
+        <div class="project-card">
+          <div class="card-image grad-ai">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKcpjwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4ZDVjMiIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5TeW1wb3NpdW08L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNhOGQ1YzIiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+VmlkZW9zPC90ZXh0Pgo8L3N2Zz4=" alt="AI Symposium Videos">
+            <div class="card-image-fallback">✦</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">Feb. 2026</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">AI · Video · Publikation</div>
+            <div class="card-title">
+              <span data-lang="de">Symposium-Vorträge: KI &amp; Kreativwirtschaft — alle Videos</span>
+              <span data-lang="en">Symposium Speeches: AI &amp; Creative Industries — all videos</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Alle Vorträge des Symposiums „The Future of Creative Industries and IP in the Age of AI" sind auf dem IPRE YouTube-Kanal als Einzel- und Playlist verfügbar. Untertitel auf Englisch und Deutsch.</span>
+              <span data-lang="en">All speeches from the symposium are published on the IPRE YouTube channel as individual videos and as a full playlist, with English and German subtitles.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Kanal</span><span data-lang="en">Channel</span>: <strong>IPRE YouTube</strong></div>
+            <a href="https://ipre.at/ai-symposium-videos/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="gallery-nav">
+      <div class="gallery-dots" id="dots-ai"></div>
+      <div class="gallery-arrows">
+        <button class="gallery-arr" onclick="scrollGallery('gallery-ai',-1)" aria-label="Zurück">←</button>
+        <button class="gallery-arr" onclick="scrollGallery('gallery-ai', 1)" aria-label="Weiter">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==============================================
+     REAL ESTATE
+     ============================================== -->
+<section class="section" id="realestate">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-label">Forschungsbereich · Immobilienwirtschaft</span>
+    </div>
+    <div class="section-header">
+      <div class="reveal reveal-delay-1">
+        <h2 class="section-h2">
+          <span data-lang="de">Raum verstehen,<br><em>Wert schaffen.</em></span>
+          <span data-lang="en">Understanding space,<br><em>creating value.</em></span>
+        </h2>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p class="section-desc">
+          <span data-lang="de">Von Stadtentwicklung über Mehrfachnutzung bis zur klimaneutralen Sanierung: IPRE verbindet immobilienwirtschaftliche Praxis mit wissenschaftlicher Grundlagenforschung.</span>
+          <span data-lang="en">From urban development and multiple use to climate-neutral refurbishment: IPRE connects real estate practice with fundamental research.</span>
+        </p>
+        <a href="https://ipre.at/forschung/projekte/" target="_blank" class="section-more">
+          <span data-lang="de">Alle Projekte</span>
+          <span data-lang="en">All Projects</span>
+        </a>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery-track" id="gallery-re">
+
+        <!-- Card 1: einfach-mehrfach -->
+        <div class="project-card">
+          <div class="card-image grad-re">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKsnzwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5laW5mYWNoIOKAkzwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5tZWhyZmFjaDwvdGV4dD4KPC9zdmc+" alt="Mehrfachnutzung">
+            <div class="card-image-fallback">⬟</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2022–2024</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Flächennutzung · Stadt Wien</span>
+              <span data-lang="en">Space Use · City of Vienna</span>
+            </div>
+            <div class="card-title">einfach – mehrfach. Mehrfach- und Zwischennutzung</div>
+            <p class="card-abstract">
+              <span data-lang="de">Von der Stadt Wien finanzierte Fallstudie zu sechs Fällen der Mehrfachnutzung (MFN). Fokus auf positive Effekte, geeignete Akteure und notwendige Kompetenzen — mit Buchpublikation.</span>
+              <span data-lang="en">City of Vienna-funded case study on six instances of multiple use. Focus on positive effects, suitable actors and required competencies — with book publication.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Leitung</span><span data-lang="en">Lead</span>: <strong>DI Kleedorfer</strong></div>
+            <a href="https://ipre.at/standards/smart-ocupancy/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Leistbarer Wohnraum -->
+        <div class="project-card">
+          <div class="card-image grad-re">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKWozwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5MZWlzdGJhcmVyPC90ZXh0PgogIDx0ZXh0IHg9IjE3MCIgeT0iMTI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXNpemU9IjEzIiBmaWxsPSIjZThjOWEwIiBvcGFjaXR5PSIwLjciIGZvbnQtZmFtaWx5PSJETSBTYW5zLHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI1MDAiPldvaG5yYXVtPC90ZXh0Pgo8L3N2Zz4=" alt="Industrieerbe">
+            <div class="card-image-fallback">▣</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2023</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Wohnbau · Bauordnung</span>
+              <span data-lang="en">Housing · Building Code</span>
+            </div>
+            <div class="card-title">
+              <span data-lang="de">Leistbarer Wohnraum &amp; soziale Fürsorge</span>
+              <span data-lang="en">Affordable Housing &amp; Social Care</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Untersuchung der Auswirkungen der Wiener Bauordnungsnovelle und des WWFSG mittels explorativer Videointerviews. Empfehlungen für ergänzende Maßnahmen zur Zielerreichung.</span>
+              <span data-lang="en">Investigation of the impact of Vienna's building code amendment and WWFSG through exploratory video interviews. Recommendations for complementary measures to achieve policy goals.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Projekt</span><span data-lang="en">Project</span>: <strong>IPRE Research</strong></div>
+            <a href="https://ipre.at/forschung/projekte/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 3: COVID / Gewerbeimmobilien -->
+        <div class="project-card">
+          <div class="card-image grad-re">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXqzwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5DT1ZJRC0xOTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5HZXdlcmJlPC90ZXh0Pgo8L3N2Zz4=" alt="COVID Gewerbe">
+            <div class="card-image-fallback">◫</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2021–2022</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Gewerbe · COVID-19 · Marktstudie</span>
+              <span data-lang="en">Commercial · COVID-19 · Market Study</span>
+            </div>
+            <div class="card-title">
+              <span data-lang="de">Wirkung von COVID-19 auf Vermieter gewerblicher Immobilien</span>
+              <span data-lang="en">Impact of COVID-19 on Commercial Real Estate Landlords</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Mitgliederfinanzierte Auswertung narrativer Interviews mit Asset Managern und Banken. Strategien bei Mietkürzungen, Neubewertung von Krediten und Krisenmanagement im Einzelhandel.</span>
+              <span data-lang="en">Member-funded analysis of narrative interviews with asset managers and banks. Strategies for rent reductions, loan revaluation and crisis management in retail real estate.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Finanzierung</span><span data-lang="en">Funded by</span>: <strong>IPRE-Mitglieder</strong></div>
+            <a href="https://ipre.at/auswirkungen-der-covid-19-pandemie-auf-vermieter-von-gewerbeimmobilien-und-finanzierende-banken/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 4: Lern-Raum-Organisation -->
+        <div class="project-card">
+          <div class="card-image grad-re">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXqTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5MZXJuLVJhdW08L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNlOGM5YTAiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+T3JnYW5pc2F0aW9uPC90ZXh0Pgo8L3N2Zz4=" alt="Lernraum">
+            <div class="card-image-fallback">◩</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2020–2022</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Raumplanung · Stadt Wien MA 56</span>
+              <span data-lang="en">Space Planning · City of Vienna</span>
+            </div>
+            <div class="card-title">Lern-Raum-Organisation — ZBG Wien</div>
+            <p class="card-abstract">
+              <span data-lang="de">Analyse, Simulation und Optimierung der Raumnutzung im Zentralen Berufsschulgebäude 6 Wien. Internationaler Fallstudienvergleich und Entwicklung eines Raumprogramms mit Qualitätenkatalog.</span>
+              <span data-lang="en">Analysis, simulation and optimisation of space use in Vienna's Central Vocational School Building 6. International case study comparison and development of a space programme with quality catalogue.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Auftraggeber</span><span data-lang="en">Client</span>: <strong>Stadt Wien MA 56</strong></div>
+            <a href="https://ipre.at/lern-raum-organisation/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 5: Sanieren im Bestand -->
+        <div class="project-card">
+          <div class="card-image grad-re">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKsnDwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5TYW5pZXJlbiBpbTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5CZXN0YW5kPC90ZXh0Pgo8L3N2Zz4=" alt="Sanieren im Bestand">
+            <div class="card-image-fallback">⬜</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">Nov. 2024</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Sanierung · Klimaneutralität · Seminar</span>
+              <span data-lang="en">Refurbishment · Climate Neutrality · Seminar</span>
+            </div>
+            <div class="card-title">
+              <span data-lang="de">Seminar „Sanieren im Bestand" 2024</span>
+              <span data-lang="en">Seminar "Refurbishment in Existing Stock" 2024</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Zweitägiges Seminar zu klimaneutraler Sanierung im innerstädtischen Bestand. Schwerpunkte: Regulatorik-Update, Sanierung von Wohnbauten, baukulturellem Erbe und Inwertsetzung.</span>
+              <span data-lang="en">Two-day seminar on climate-neutral refurbishment of urban building stock. Focus: regulatory update, residential renovation, built cultural heritage and value creation.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Leitung</span><span data-lang="en">Lead</span>: <strong>Univ.-Prof. Wiegand</strong></div>
+            <a href="https://ipre.at/sanieren-im-bestand/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 6: Stadt Boden Verantwortung -->
+        <div class="project-card">
+          <div class="card-image grad-re">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXjjwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5TdGFkdCDCtyBCb2RlbjwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2U4YzlhMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5WZXJhbnR3b3J0dW5nPC90ZXh0Pgo8L3N2Zz4=" alt="Stadt Boden Verantwortung">
+            <div class="card-image-fallback">◎</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">März 2026</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Stadtentwicklung · RICS · München</span>
+              <span data-lang="en">Urban Development · RICS · Munich</span>
+            </div>
+            <div class="card-title">Stadt. Boden. Verantwortung — München 2026</div>
+            <p class="card-abstract">
+              <span data-lang="de">Abendveranstaltung von TUM CSRE, RICS, crenet und Immofrauen in München. IPRE-Geschäftsführer Prof. Wiegand sprach zur SoBoN-Studie und nachhaltiger Bodennutzung.</span>
+              <span data-lang="en">Evening event by TUM CSRE, RICS, crenet and Immofrauen in Munich. IPRE managing director Prof. Wiegand spoke on the SoBoN study and sustainable land use.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Kooperation</span><span data-lang="en">Co-op</span>: <strong>TUM · RICS · crenet</strong></div>
+            <a href="https://ipre.at/stadt-boden-verantwortung-am-9-03-2026-in-muenchen/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="gallery-nav">
+      <div class="gallery-dots" id="dots-re"></div>
+      <div class="gallery-arrows">
+        <button class="gallery-arr" onclick="scrollGallery('gallery-re',-1)" aria-label="Zurück">←</button>
+        <button class="gallery-arr" onclick="scrollGallery('gallery-re', 1)" aria-label="Weiter">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ==============================================
+     LEARNING
+     ============================================== -->
+<section class="section" id="learning">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-label">Forschungsbereich · Learning &amp; Transfer</span>
+    </div>
+    <div class="section-header">
+      <div class="reveal reveal-delay-1">
+        <h2 class="section-h2">
+          <span data-lang="de">Wissen, das<br>in der <em>Praxis wirkt.</em></span>
+          <span data-lang="en">Knowledge that<br><em>works in practice.</em></span>
+        </h2>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <p class="section-desc">
+          <span data-lang="de">IPRE vernetzt Talente, Unternehmen und Spezialist:innen — von internationalen Bildungsprojekten bis zu kreativen Lernräumen und aktivem Wissenstransfer zwischen Hochschule und Wirtschaft.</span>
+          <span data-lang="en">IPRE connects talents, companies and specialists — from international education projects to creative learning spaces and active knowledge transfer between academia and industry.</span>
+        </p>
+        <a href="https://ipre.at/wissenstransfer/" target="_blank" class="section-more">
+          <span data-lang="de">Wissenstransfer</span>
+          <span data-lang="en">Knowledge Transfer</span>
+        </a>
+      </div>
+    </div>
+    <div class="gallery-wrap">
+      <div class="gallery-track" id="gallery-learn">
+
+        <!-- Card 1: Waldkunst -->
+        <div class="project-card">
+          <div class="card-image grad-learn">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXkDwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5XYWxka3Vuc3Q8L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNhOGM0ZTAiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+aW4gZGVyIFN0YWR0PC90ZXh0Pgo8L3N2Zz4=" alt="Waldkunst">
+            <div class="card-image-fallback">◐</div>
+            <span class="card-status status-active">
+              <span data-lang="de">Laufend</span><span data-lang="en">Active</span>
+            </span>
+            <span class="card-year">2022–</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Kunst · Natur · Bildung</span>
+              <span data-lang="en">Art · Nature · Education</span>
+            </div>
+            <div class="card-title">
+              <span data-lang="de">Waldkunst &amp; Waldkunst in der Stadt</span>
+              <span data-lang="en">Waldkunst &amp; Forest Art in the City</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">Initiative von IPRE und Verein für internationale Waldkunst e.V. 2022 Eröffnung Waldkunstpark St. Corona am Wechsel. Seit 2023: „Waldkunst in der Stadt" — kreative Sommerworkshops für Kinder und Jugendliche in Wien.</span>
+              <span data-lang="en">Initiative of IPRE and the International Forest Art Association. 2022 opening of the Waldkunstpark in St. Corona am Wechsel. Since 2023: creative summer workshops for children and youth in Vienna.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Leitung</span><span data-lang="en">Lead</span>: <strong>DI Yulia Kartysh</strong></div>
+            <a href="https://ipre.at/waldkunst-in-der-stadt-2026/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 2: HERITAGE-PRO -->
+        <div class="project-card">
+          <div class="card-image grad-learn">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXiTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5IRVJJVEFHRTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5QUk88L3RleHQ+Cjwvc3ZnPg==" alt="Heritage Pro">
+            <div class="card-image-fallback">◉</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2019–2023</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Erasmus+ · Heritage Management</div>
+            <div class="card-title">HERITAGE-PRO</div>
+            <p class="card-abstract">
+              <span data-lang="de">Erasmus+-Projekt zur Entwicklung eines Trainingsprogramms für Heritage Site Manager:innen. IPRE lieferte Bildungskonzepte und Inhalte zur Inwertsetzung von baukulturellem Erbe.</span>
+              <span data-lang="en">Erasmus+ project developing a training programme for heritage site managers. IPRE contributed education concepts and content on valorising built cultural heritage.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Förderung</span><span data-lang="en">Funded by</span>: <strong>Erasmus+</strong></div>
+            <a href="https://heritage-pro.eu/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 3: ERES Education Seminar 2024 -->
+        <div class="project-card">
+          <div class="card-image grad-learn">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKsoTwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5FUkVTIEVkdWNhdGlvbjwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEyOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5TZW1pbmFyIDIwMjQ8L3RleHQ+Cjwvc3ZnPg==" alt="ERES 2024">
+            <div class="card-image-fallback">⬡</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">Dez. 2024</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">ERES · Education · TU Wien</div>
+            <div class="card-title">
+              <span data-lang="de">20. ERES Education Seminar — Learning &amp; Built Environment</span>
+              <span data-lang="en">20th ERES Education Seminar — Learning &amp; Built Environment</span>
+            </div>
+            <p class="card-abstract">
+              <span data-lang="de">IPRE organisierte das 20. ERES Education Seminar an der TU Wien gemeinsam mit BCE Beyond Carbon Energy. Thema: Lernen und der gebaute Raum — Bildung, Nachhaltigkeit, Innovation.</span>
+              <span data-lang="en">IPRE co-organised the 20th ERES Education Seminar at TU Wien with BCE Beyond Carbon Energy. Theme: Learning and the Built Environment — education, sustainability, innovation.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Kooperation</span><span data-lang="en">Partner</span>: <strong>ERES · TU Wien · BCE</strong></div>
+            <a href="https://ipre.at/eres/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 4: REallabor Active Learning -->
+        <div class="project-card">
+          <div class="card-image grad-learn">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKcpjwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5SRWFsbGFib3I8L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNhOGM0ZTAiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+QWN0aXZlIExlYXJuaW5nPC90ZXh0Pgo8L3N2Zz4=" alt="REallabor">
+            <div class="card-image-fallback">✦</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">2022</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">
+              <span data-lang="de">Aktives Lernen · Berufsschule</span>
+              <span data-lang="en">Active Learning · Vocational School</span>
+            </div>
+            <div class="card-title">REallabor Active Learning — ZBG Wien</div>
+            <p class="card-abstract">
+              <span data-lang="de">Partizipatives Forschungsprojekt zur Entwicklung aktiver Lernumgebungen im ZBG Wien. Finanziert durch Stadt Wien und Steelcase. Co-Creation mit Lehrer:innen und Schüler:innen.</span>
+              <span data-lang="en">Participatory research project developing active learning environments at Vienna's central vocational school. Funded by the City of Vienna and Steelcase. Co-creation with teachers and students.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Finanzierung</span><span data-lang="en">Funded by</span>: <strong>Stadt Wien · Steelcase</strong></div>
+            <a href="https://ipre.at/reallabor-active-learning/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+        <!-- Card 5: REAL CORP 2026 -->
+        <div class="project-card">
+          <div class="card-image grad-learn">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMzQwIDIwMCI+CiAgPHRleHQgeD0iMTcwIiB5PSI3NSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIzNCIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC41IiBmb250LWZhbWlseT0ic2VyaWYiPuKXjjwvdGV4dD4KICA8dGV4dCB4PSIxNzAiIHk9IjEwOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZm9udC1zaXplPSIxMyIgZmlsbD0iI2E4YzRlMCIgb3BhY2l0eT0iMC43IiBmb250LWZhbWlseT0iRE0gU2FucyxzYW5zLXNlcmlmIiBmb250LXdlaWdodD0iNTAwIj5SRUFMIENPUlA8L3RleHQ+CiAgPHRleHQgeD0iMTcwIiB5PSIxMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZvbnQtc2l6ZT0iMTMiIGZpbGw9IiNhOGM0ZTAiIG9wYWNpdHk9IjAuNyIgZm9udC1mYW1pbHk9IkRNIFNhbnMsc2Fucy1zZXJpZiIgZm9udC13ZWlnaHQ9IjUwMCI+MjAyNjwvdGV4dD4KPC9zdmc+" alt="Real Corp 2026">
+            <div class="card-image-fallback">◎</div>
+            <span class="card-status status-done">
+              <span data-lang="de">Abgeschlossen</span><span data-lang="en">Completed</span>
+            </span>
+            <span class="card-year">März 2026</span>
+          </div>
+          <div class="card-body">
+            <div class="card-category">Conference · Urban Planning</div>
+            <div class="card-title">REAL CORP 2026 — The Future of Education</div>
+            <p class="card-abstract">
+              <span data-lang="de">31. Internationale Konferenz zu Stadtplanung und Regionalentwicklung in Wien. IPRE-Geschäftsführer Dietmar Wiegand als Keynote-Speaker und Podiumsteilnehmer.</span>
+              <span data-lang="en">31st International Conference on Urban Planning and Regional Development in Vienna. IPRE managing director Dietmar Wiegand as keynote speaker and panel member.</span>
+            </p>
+          </div>
+          <div class="card-footer">
+            <div class="card-pi"><span data-lang="de">Keynote</span><span data-lang="en">Keynote</span>: <strong>Univ.-Prof. Wiegand</strong></div>
+            <a href="https://ipre.at/real-corp-2026/" target="_blank" class="card-arrow">→</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="gallery-nav">
+      <div class="gallery-dots" id="dots-learn"></div>
+      <div class="gallery-arrows">
+        <button class="gallery-arr" onclick="scrollGallery('gallery-learn',-1)" aria-label="Zurück">←</button>
+        <button class="gallery-arr" onclick="scrollGallery('gallery-learn', 1)" aria-label="Weiter">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==============================================
+     ÜBER IPRE
+     ============================================== -->
+<section class="section" id="about" style="padding-top:120px; padding-bottom:120px;">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">
+      <div class="eyebrow-dot"></div>
+      <span class="eyebrow-label">Institut · IPRE Wien</span>
+    </div>
+    <div class="reveal reveal-delay-1" style="margin-bottom:48px;">
+      <h2 class="section-h2">
+        <span data-lang="de"><em>Über</em> IPRE</span>
+        <span data-lang="en"><em>About</em> IPRE</span>
+      </h2>
+    </div>
+
+    <div class="about-tabs reveal reveal-delay-2">
+      <button class="about-tab active" onclick="showPanel('team')">Team</button>
+      <button class="about-tab" onclick="showPanel('news')">News</button>
+      <button class="about-tab" onclick="showPanel('geschichte')">
+        <span data-lang="de">Geschichte</span><span data-lang="en">History</span>
+      </button>
+      <button class="about-tab" onclick="showPanel('impressum')">Impressum</button>
+    </div>
+
+    <!-- TEAM -->
+    <div class="about-panel active" id="panel-team">
+      <div class="team-grid">
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/06/wiegand-736x1024.jpg" alt="Dietmar Wiegand" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>DW</div>'">
+          </div>
+          <div class="team-name">Univ. Prof. Prof. h.c. Dipl.-Ing. Architect Dietmar Wiegand</div>
+          <div class="team-title">Geschäftsführer IPRE</div>
+          <span class="team-focus">Stadtentwicklung · Prozessforschung</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/04/hammertinger.png" alt="Walter Hammertinger" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>WH</div>'">
+          </div>
+          <div class="team-name">DI Walter Hammertinger</div>
+          <div class="team-title">Präsident</div>
+          <span class="team-focus">Immobilienentwicklung</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/04/Hoehne.png" alt="Marc-Guido Höhne" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>MH</div>'">
+          </div>
+          <div class="team-name">DI Marc-Guido Höhne</div>
+          <div class="team-title">Stellvertretender Präsident</div>
+          <span class="team-focus">Immobilienmanagement</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/04/kleedorfer.png" alt="Jutta Kleedorfer" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>JK</div>'">
+          </div>
+          <div class="team-name">DI Jutta Kleedorfer</div>
+          <div class="team-title">Vorstandsmitglied</div>
+          <span class="team-focus">Mehrfachnutzung · Stadtplanung</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/05/kartysh.png" alt="Yulia Kartysh" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>YK</div>'">
+          </div>
+          <div class="team-name">DI Yulia Kartysh</div>
+          <div class="team-title">Senior Researcher</div>
+          <span class="team-focus">Kunst · Bildung · Waldkunst</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/10/korolova.png" alt="Mariya Korolova" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>MK</div>'">
+          </div>
+          <div class="team-name">DI Mariya Korolova</div>
+          <div class="team-title">Senior Researcher</div>
+          <span class="team-focus">Stadtentwicklung · Forschung</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/09/huber.png" alt="Isabel Huber" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>IH</div>'">
+          </div>
+          <div class="team-name">DI Isabel Huber, M.Sc.</div>
+          <div class="team-title">Senior Researcher</div>
+          <span class="team-focus">Immobilienwirtschaft</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2024/06/Team_HK.png" alt="Harald Karl" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>HK</div>'">
+          </div>
+          <div class="team-name">Dr. Harald Karl</div>
+          <div class="team-title">Rechtsbeistand</div>
+          <span class="team-focus">Recht · Compliance</span>
+        </div>
+
+        <div class="team-card">
+          <div class="team-avatar-wrap">
+            <img src="https://ipre.at/wp-content/uploads/2023/05/groenwaldt-martin.png" alt="Pirka Grönwaldt-Martin" onerror="this.parentElement.innerHTML='<div class=\'team-avatar\'>PG</div>'">
+          </div>
+          <div class="team-name">Pirka Grönwaldt-Martin, M.A.</div>
+          <div class="team-title">ICT Specialist</div>
+          <span class="team-focus">Kommunikation · Digital</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="about-panel" id="panel-news">
+      <div class="news-list">
+
+        <div class="news-item">
+          <div class="news-date">
+            <img class="news-thumb" src="https://ipre.at/wp-content/uploads/2026/03/Real-Corp-2026-Teaser-360x240.png" alt="" loading="lazy">
+            <span>März 2026</span>
+          </div>
+          <div>
+            <div class="news-title">REAL CORP 2026 — The Future of Education</div>
+            <p class="news-body">Dietmar Wiegand als Keynote-Speaker und Podiumsteilnehmer bei der 31. Internationalen Konferenz zu Stadtplanung und Regionalentwicklung in Wien.</p>
+          </div>
+          <a href="https://ipre.at/real-corp-2026/" target="_blank" class="news-tag">Konferenz</a>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <img class="news-thumb" src="https://ipre.at/wp-content/uploads/2026/03/Stadt-Boden-Verantwortung-TEASER-360x240.png" alt="" loading="lazy">
+            <span>März 2026</span>
+          </div>
+          <div>
+            <div class="news-title">Stadt. Boden. Verantwortung — München</div>
+            <p class="news-body">IPRE-Geschäftsführer Prof. Wiegand spricht bei der Abendveranstaltung von TUM CSRE und RICS zu nachhaltiger Bodennutzung und der SoBoN-Studie.</p>
+          </div>
+          <a href="https://ipre.at/stadt-boden-verantwortung-am-9-03-2026-in-muenchen/" target="_blank" class="news-tag">Immobilien</a>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <img class="news-thumb" src="https://ipre.at/wp-content/uploads/2026/02/Titelbild-3-Forget-everything-Augen-360x240.png" alt="" loading="lazy">
+            <span>Feb. 2026</span>
+          </div>
+          <div>
+            <div class="news-title">Alle Symposium-Vorträge online: Future of Creative Industries &amp; AI</div>
+            <p class="news-body">Sämtliche Vorträge des IPRE-Jubiläumssymposiums sind auf YouTube veröffentlicht — als Einzel-Videos und vollständige Playlist, mit Untertiteln in Deutsch und Englisch.</p>
+          </div>
+          <a href="https://ipre.at/ai-symposium-videos/" target="_blank" class="news-tag">AI</a>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <img class="news-thumb" src="https://ipre.at/wp-content/uploads/2026/01/10-IPRE-AI-cut.png" alt="" loading="lazy">
+            <span>Jän. 2026</span>
+          </div>
+          <div>
+            <div class="news-title">Symposium: Future of Creative Industries and IP in the Age of AI</div>
+            <p class="news-body">IPRE feiert 10-Jahres-Jubiläum mit internationalem Symposium im Kuppelsaal der TU Wien. Diskussion zu KI, Urheberrecht und kreativem Schaffen.</p>
+          </div>
+          <a href="https://ipre.at/future-of-creative-industries-and-ip-in-the-age-of-ai/" target="_blank" class="news-tag">AI · Jubiläum</a>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <img class="news-thumb" src="https://ipre.at/wp-content/uploads/2025/11/GrafikWeb2.jpg" alt="" loading="lazy">
+            <span>Nov. 2025</span>
+          </div>
+          <div>
+            <div class="news-title">AUF DEM WEG — Ausstellung in Wien</div>
+            <p class="news-body">IPRE präsentiert Werke von Schüler:innen der Künstlerin Nina Werzhbinskaja-Rabinowich. Die Ausstellung zeigt eindrucksvoll die Suche nach eigenen Positionen und Ausdrucksformen.</p>
+          </div>
+          <a href="https://ipre.at/auf_dem_weg_ausstellung_2025/" target="_blank" class="news-tag">Ausstellung</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GESCHICHTE -->
+    <div class="about-panel" id="panel-geschichte">
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-year">2017</div>
+          <div class="timeline-title">Gründung IPRE</div>
+          <p class="timeline-text">Das Institut für immobilienwirtschaftliche Forschung (IPRE) wird am 16. November 2017 gegründet — vormals als Allianz professioneller Immobilienentwickler und -manager. Sitz: Heinrichsgasse 3/11, 1010 Wien.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2019–2023</div>
+          <div class="timeline-title">Internationale Kooperationen &amp; Erasmus+</div>
+          <p class="timeline-text">IPRE übernimmt Bildungsverantwortung im europäischen Raum: HERITAGE-PRO (Erasmus+) entwickelt ein Trainingsprogramm für Heritage Site Manager:innen in internationaler Kooperation. Community Developed Heritage-Projekt in Kosovo (BACID-Förderung).</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2020–2022</div>
+          <div class="timeline-title">COVID-19-Forschung &amp; Lern-Raum-Organisation</div>
+          <p class="timeline-text">Während der Pandemie analysiert IPRE die Auswirkungen auf gewerbliche Vermieter:innen und temporäre Wohnformen. Parallel entwickelt IPRE für die Stadt Wien die Lern-Raum-Organisation des Zentralen Berufsschulgebäudes 6 und das REallabor Active Learning.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-title">Waldkunstpark — Kunst, Natur &amp; Nachhaltigkeit</div>
+          <p class="timeline-text">Eröffnung des Waldkunstparks in Sankt Corona am Wechsel: Sechs internationale Künstler:innen schaffen Werke direkt im Wald. Start einer langfristigen Initiative zur Verbindung von Kunst, Natur und Bildung in Kooperation mit dem Verein für internationale Waldkunst e.V. (Darmstadt).</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-title">Waldkunst in der Stadt &amp; Smart Occupancy</div>
+          <p class="timeline-text">„Waldkunst in der Stadt" startet in Wien — zunächst an der Schule Phönix im 11. Bezirk. Parallel veröffentlicht IPRE mit DI Kleedorfer die Buchpublikation „einfach – mehrfach" zu Mehrfach- und Zwischennutzung.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">ERES Education Seminar &amp; AI-Forschung</div>
+          <p class="timeline-text">IPRE organisiert das 20. ERES Education Seminar an der TU Wien zum Thema „Learning and the Built Environment". Gleichzeitig intensiviert IPRE die Forschung zu KI, algorithmischen Systemen und deren Bedeutung für Immobilienwirtschaft und kreative Berufe.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-title">10-Jahres-Jubiläum &amp; internationale Präsenz</div>
+          <p class="timeline-text">IPRE feiert sein Jubiläum mit dem Symposium „Future of Creative Industries and IP in the Age of AI" im Kuppelsaal der TU Wien. Dietmar Wiegand spricht als Keynote-Speaker bei REAL CORP 2026 und bei der Veranstaltung „Stadt. Boden. Verantwortung" in München.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- IMPRESSUM -->
+    <div class="about-panel" id="panel-impressum">
+      <div class="impressum-grid">
+        <div>
+          <div class="impressum-label">Herausgeber</div>
+          <p class="impressum-text">
+            Institut für immobilienwirtschaftliche Forschung (IPRE)<br>
+            <em style="font-size:13px;color:var(--c-muted);">Vormals Allianz professioneller Immobilienentwickler und -manager</em><br><br>
+            Heinrichsgasse 3/11<br>
+            1010 Wien, Österreich<br><br>
+            Tel.: <a href="tel:+43158801260441">+43 1 58801-26041</a><br>
+            Fax: +43 1 58801-26043<br>
+            E-Mail: <a href="mailto:contact@ipre.at">contact@ipre.at</a><br><br>
+            Entstehungsdatum: 16.11.2017
+          </p>
+        </div>
+        <div>
+          <div class="impressum-label">Vorstand</div>
+          <p class="impressum-text">
+            DI Walter Hammertinger <em style="color:var(--c-muted);font-size:13px;">(Präsident)</em><br>
+            DI Marc-Guido Höhne <em style="color:var(--c-muted);font-size:13px;">(Stellv. Präsident)</em><br>
+            Univ.Prof. Prof. h.c. Dipl.-Ing. Architect Dietmar Wiegand <em style="color:var(--c-muted);font-size:13px;">(Geschäftsführer)</em><br>
+            DI Jutta Kleedorfer <em style="color:var(--c-muted);font-size:13px;">(Vorstand)</em><br>
+            Ing. Mag. Hannes Horvath <em style="color:var(--c-muted);font-size:13px;">(Vorstand)</em>
+          </p>
+        </div>
+        <div>
+          <div class="impressum-label">Behörden &amp; Register</div>
+          <p class="impressum-text">
+            Vereinsbehörde: Landespolizeidirektion Wien,<br>
+            Referat Vereins-, Versammlungs- und Medienrechtsangelegenheiten<br><br>
+            UID: ATU 72621068<br>
+            ZVR-Zahl: 806790404
+          </p>
+        </div>
+        <div>
+          <div class="impressum-label">Rechtliches</div>
+          <p class="impressum-text">
+            Alle Inhalte dieser Website unterliegen dem österreichischen Urheberrecht. Irrtümer und Änderungen vorbehalten.<br><br>
+            <a href="https://ipre.at/datenschutzerklaerung/" target="_blank">Datenschutzerklärung</a><br>
+            <a href="https://ipre.at/cookie-richtlinie-eu/" target="_blank">Cookie-Richtlinie (EU)</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="section-inner">
+    <div class="cta-eyebrow reveal">Kooperation &amp; Auftragsforschung</div>
+    <h2 class="cta-h2 reveal reveal-delay-1">
+      <span data-lang="de"><em>Gemeinsam</em><br>forschen und gestalten.</span>
+      <span data-lang="en"><em>Research</em><br>and shape together.</span>
+    </h2>
+    <p class="cta-sub reveal reveal-delay-2">
+      <span data-lang="de">IPRE bietet Auftragsforschung, Wissenstransfer und Netzwerkzugang für Unternehmen, öffentliche Institutionen und Wissenschaftspartner:innen.</span>
+      <span data-lang="en">IPRE offers commissioned research, knowledge transfer and network access for companies, public institutions and research partners.</span>
+    </p>
+    <a href="mailto:contact@ipre.at" class="btn-white reveal reveal-delay-3">
+      <span data-lang="de">Kontakt aufnehmen</span>
+      <span data-lang="en">Get in Touch</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">IPRE<span>.</span></div>
+        <div class="footer-tagline">Institut für immobilienwirtschaftliche Forschung · Wien</div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Forschung</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="navTo('ai')">AI &amp; Digitalisierung</a></li>
+            <li><a href="javascript:void(0)" onclick="navTo('realestate')">Immobilienwirtschaft</a></li>
+            <li><a href="javascript:void(0)" onclick="navTo('learning')">Learning &amp; Transfer</a></li>
+            <li><a href="https://ipre.at/forschung/publikationen/" target="_blank">Publikationen</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Institut</h4>
+          <ul>
+            <li><a href="javascript:void(0)" onclick="navTo('about'); setTimeout(()=>showPanel('team'),400)">Team</a></li>
+            <li><a href="javascript:void(0)" onclick="navTo('about'); setTimeout(()=>showPanel('news'),400)">News</a></li>
+            <li><a href="https://ipre.at/brand-mission/" target="_blank">Mission</a></li>
+            <li><a href="javascript:void(0)" onclick="navTo('about'); setTimeout(()=>showPanel('impressum'),400)">Impressum</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Standards</h4>
+          <ul>
+            <li><a href="https://ipre.at/standards/smart-ocupancy/" target="_blank">Smart Occupancy</a></li>
+            <li><a href="https://ipre.at/standards/projektentwicklung-basics/" target="_blank">Projektentwicklung</a></li>
+            <li><a href="https://ipre.at/jobs/" target="_blank">Jobs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 IPRE — Institut für immobilienwirtschaftliche Forschung, Wien. Alle Rechte vorbehalten.</div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/IPREVIE" target="_blank">Facebook</a>
+        <a href="https://twitter.com/IPRE7" target="_blank">Twitter</a>
+        <a href="https://www.youtube.com/channel/UCnCcxM0P2nY1mxXbp-u5Fqg" target="_blank">YouTube</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==============================================
+     JAVASCRIPT
+     ============================================== -->
+<script>
+/* ---------- Language ---------- */
+function setLang(l) {
+  document.body.className = 'lang-' + l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.trim().toLowerCase() === l));
+  document.querySelectorAll('.drawer-lang button').forEach((b,i) => b.classList.toggle('active', (i===0&&l==='de')||(i===1&&l==='en')));
+}
+
+/* ---------- Scroll helper (avoids conflict with window.scrollTo) ---------- */
+function navTo(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ---------- Drawer ---------- */
+function openDrawer()  { document.getElementById('nav-drawer').classList.add('open'); }
+function closeDrawer() { document.getElementById('nav-drawer').classList.remove('open'); }
+function toggleDrawer() {
+  document.getElementById('nav-drawer').classList.toggle('open');
+}
+function drawerNav(id) {
+  closeDrawer();
+  setTimeout(() => navTo(id), 80);
+}
+
+/* ---------- About Tabs ---------- */
+function showPanel(id) {
+  document.querySelectorAll('.about-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.about-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  const map = {team:0, news:1, geschichte:2, impressum:3};
+  const tabs = document.querySelectorAll('.about-tab');
+  if (map[id] !== undefined) tabs[map[id]].classList.add('active');
+  // re-animate items in newly opened panel
+  setTimeout(() => {
+    document.querySelectorAll('#panel-' + id + ' .team-card, #panel-' + id + ' .news-item, #panel-' + id + ' .timeline-item').forEach((el, i) => {
+      el.classList.remove('is-visible');
+      setTimeout(() => { el.classList.add('is-visible'); }, i * 80);
+    });
+  }, 20);
+  document.getElementById('about').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+/* ---------- Intersection Observer ---------- */
+// Lower threshold for mobile so elements trigger before fully in view
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
+
+function initReveal() {
+  document.querySelectorAll('.reveal, .project-card, .news-item, .timeline-item, .team-card').forEach(el => io.observe(el));
+}
+
+/* ---------- Active Nav on Scroll ---------- */
+const navLinks = document.querySelectorAll('.nav-links a');
+const sectionIds = ['ai','realestate','learning','about'];
+// map section id → nav link index
+const navIdxMap = { ai:0, realestate:1, learning:2, about:3 };
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const idx = navIdxMap[e.target.id];
+      if (idx !== undefined && navLinks[idx]) navLinks[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.2 });
+sectionIds.forEach(id => { const el = document.getElementById(id); if (el) sectionObserver.observe(el); });
+
+/* ---------- Hero Parallax — desktop only, rAF-throttled ---------- */
+const heroMesh    = document.querySelector('.hero-mesh');
+const heroContent = document.querySelector('.hero-content');
+const isMobile = () => window.innerWidth <= 680;
+
+if (heroMesh)    heroMesh.style.willChange    = 'transform';
+if (heroContent) heroContent.style.willChange = 'transform, opacity';
+
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (isMobile() || ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY, vh = window.innerHeight;
+    if (y < vh) {
+      if (heroMesh)    heroMesh.style.transform    = `translateY(${y * 0.38}px)`;
+      if (heroContent) heroContent.style.opacity   = Math.max(0, 1 - (y / vh) * 1.6);
+      if (heroContent) heroContent.style.transform = `translateY(${y * 0.22}px)`;
+    }
+    ticking = false;
+  });
+}, { passive: true });
+
+/* ---------- Gallery ---------- */
+function initGallery(trackId, dotsId) {
+  const track = document.getElementById(trackId);
+  const dotsWrap = document.getElementById(dotsId);
+  if (!track || !dotsWrap) return;
+  const cards = track.querySelectorAll('.project-card');
+  const count = cards.length;
+
+  // dots
+  for (let i = 0; i < count; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Projekt ${i+1}`);
+    dot.onclick = () => cards[i].scrollIntoView({behavior:'smooth', block:'nearest', inline:'start'});
+    dotsWrap.appendChild(dot);
+  }
+
+  const dots = dotsWrap.querySelectorAll('.gallery-dot');
+  function updateDots() {
+    const cardW = (cards[0]?.offsetWidth || 300) + 20;
+    const idx = Math.min(count - 1, Math.round(track.scrollLeft / cardW));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  }
+  track.addEventListener('scroll', updateDots, { passive: true });
+
+  // Desktop drag
+  let isDown = false, startX, scrollStart;
+  track.addEventListener('mousedown', e => {
+    isDown = true; track.classList.add('is-dragging');
+    startX = e.pageX - track.offsetLeft; scrollStart = track.scrollLeft;
+  });
+  ['mouseleave','mouseup'].forEach(ev => track.addEventListener(ev, () => { isDown = false; track.classList.remove('is-dragging'); }));
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    track.scrollLeft = scrollStart - (e.pageX - track.offsetLeft - startX) * 1.2;
+  });
+
+  // Mobile touch snap (native CSS scroll-snap handles it, just update dots)
+  track.addEventListener('touchend', () => { setTimeout(updateDots, 150); }, { passive: true });
+}
+
+function scrollGallery(trackId, dir) {
+  const track = document.getElementById(trackId);
+  if (!track) return;
+  const cards = track.querySelectorAll('.project-card');
+  const cardW = (cards[0]?.offsetWidth || 300) + 20;
+  track.scrollBy({ left: dir * cardW, behavior: 'smooth' });
+}
+
+/* ---------- Init ---------- */
+document.addEventListener('DOMContentLoaded', () => {
+  initReveal();
+  initGallery('gallery-ai',    'dots-ai');
+  initGallery('gallery-re',    'dots-re');
+  initGallery('gallery-learn', 'dots-learn');
+
+  // Card images: start invisible, fade in on load, hide on error (gradient shows through)
+  document.querySelectorAll('.card-image img').forEach(img => {
+    img.style.opacity = '0';
+    img.addEventListener('load',  () => { img.style.opacity = '1'; });
+    img.addEventListener('error', () => { img.style.display = 'none'; });
+    // Already cached/loaded
+    if (img.complete && img.naturalWidth > 0) { img.style.opacity = '1'; }
+  });
+
+  // Initial team card stagger
+  setTimeout(() => {
+    document.querySelectorAll('#panel-team .team-card').forEach((el, i) => {
+      setTimeout(() => el.classList.add('is-visible'), i * 80);
+    });
+  }, 200);
+});
+</script>
+</body>
+</html>
