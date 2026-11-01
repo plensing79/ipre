@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/entwicklung-bestandsimmobilien#article",
+  "headline": "Die Entwicklung von Bestandsimmobilien: Ein systemischer Ansatz für nachhaltige Stadtentwicklung",
+  "description": "Bestandsimmobilien in sechs Schritten entwickeln: Standort, Bauordnung und Denkmalschutz, Bestandsaufnahme, Nutzungskonzept, Stakeholder, Umsetzung.",
+  "image": [
+    "https://realestateheritage.at/img/bestand.webp"
+  ],
+  "datePublished": "2025-02-04",
+  "dateModified": "2025-02-04",
+  "inLanguage": "de-AT",
+  "articleSection": "Bestand",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/entwicklung-bestandsimmobilien#webpage"
+}

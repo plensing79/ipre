@@ -1,0 +1,18 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Real Estate Heritage",
+      "item": "https://realestateheritage.at/en/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "EVS valuation app: vibe coding and the biggest transformation since Excel",
+      "item": "https://realestateheritage.at/en/journal/vibe-coding-evs"
+    }
+  ]
+}

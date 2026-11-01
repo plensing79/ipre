@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Real Estate Heritage",
+      "item": "https://realestateheritage.at/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Journal",
+      "item": "https://realestateheritage.at/journal"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Humanistischer Kapitalismus in der Immobilienbranche",
+      "item": "https://realestateheritage.at/journal/humanistischer-kapitalismus"
+    }
+  ]
+}

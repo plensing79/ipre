@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/powerprompts#article",
+  "headline": "100 Powerprompts: Denkwerkzeuge für bessere Entscheidungen mit KI",
+  "description": "Red Team, Premortem, Steelman und 97 weitere Denkwerkzeuge: wie Sie KI als Sparringspartner für Entscheidungen nutzen statt als Suchmaschine.",
+  "image": [
+    "https://realestateheritage.at/img/werkzeuge.webp"
+  ],
+  "datePublished": "2026-10-18",
+  "dateModified": "2026-10-18",
+  "inLanguage": "de-AT",
+  "articleSection": "AI",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/powerprompts#webpage"
+}

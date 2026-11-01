@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Real Estate Heritage",
+      "item": "https://realestateheritage.at/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Journal",
+      "item": "https://realestateheritage.at/journal"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Die drei Stufen von ESG im Immobiliensektor: Von Pflicht zur Vision",
+      "item": "https://realestateheritage.at/journal/drei-stufen-esg"
+    }
+  ]
+}

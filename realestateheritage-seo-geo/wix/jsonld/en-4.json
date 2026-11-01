@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://realestateheritage.at/#lisa-gasteiger-rabenstein",
+  "name": "Lisa Gasteiger-Rabenstein",
+  "jobTitle": "Gründerin",
+  "worksFor": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "url": "https://realestateheritage.at/ueber-uns"
+}

@@ -1,0 +1,79 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Leistungen",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "Service",
+        "name": "Strategisches Asset Management & ESG",
+        "provider": {
+          "@id": "https://realestateheritage.at/#organization"
+        },
+        "areaServed": "Wien"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "Service",
+        "name": "Architektur & Immobilienmarketing",
+        "provider": {
+          "@id": "https://realestateheritage.at/#organization"
+        },
+        "areaServed": "Wien"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "Service",
+        "name": "Wirtschaftliche Steuerung & Transaktion",
+        "provider": {
+          "@id": "https://realestateheritage.at/#organization"
+        },
+        "areaServed": "Wien"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "Service",
+        "name": "Standortberatung mit datengestütztem Scoring",
+        "provider": {
+          "@id": "https://realestateheritage.at/#organization"
+        },
+        "areaServed": "Wien"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "Service",
+        "name": "KI-Werkzeuge nach Maß",
+        "provider": {
+          "@id": "https://realestateheritage.at/#organization"
+        },
+        "areaServed": "Wien"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "Service",
+        "name": "AI-Leadership & Workshops",
+        "provider": {
+          "@id": "https://realestateheritage.at/#organization"
+        },
+        "areaServed": "Wien"
+      }
+    }
+  ]
+}

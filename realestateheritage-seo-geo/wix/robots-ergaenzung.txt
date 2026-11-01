@@ -1,0 +1,18 @@
+# Wix: Einstellungen → SEO → Robots.txt-Editor
+# Die bestehenden Wix-Zeilen NICHT löschen. Diesen Block unten anfügen.
+
+# KI-Suche und Assistenten (lesen Seiten, um Fragen zu beantworten und Quellen zu verlinken)
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+
+# KI-Training. Wer das nicht möchte: "Allow: /" durch "Disallow: /" ersetzen.
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /

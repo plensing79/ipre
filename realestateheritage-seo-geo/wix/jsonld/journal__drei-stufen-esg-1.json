@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/drei-stufen-esg#article",
+  "headline": "Die drei Stufen von ESG im Immobiliensektor: Von Pflicht zur Vision",
+  "description": "Light, Transitional und Deep ESG: drei Stufen der Nachhaltigkeit bei Immobilien – von der gesetzlichen Pflicht bis zum ganzheitlichen Anspruch.",
+  "image": [
+    "https://realestateheritage.at/img/esg.webp"
+  ],
+  "datePublished": "2025-08-11",
+  "dateModified": "2025-08-11",
+  "inLanguage": "de-AT",
+  "articleSection": "ESG",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/drei-stufen-esg#webpage"
+}

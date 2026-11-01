@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/vier-quadranten-modell-wien#article",
+  "headline": "Vier-Quadranten-Modell: Der Wiener Wohnungsmarkt als interaktives Szenario-Tool",
+  "description": "Was passiert mit Mieten, Preisen und Neubau in Wien, wenn Bauen teurer wird? Ein interaktives Modell nach DiPasquale und Wheaton.",
+  "image": [
+    "https://realestateheritage.at/img/ai-quad.webp"
+  ],
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "inLanguage": "de-AT",
+  "articleSection": "Markt",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/vier-quadranten-modell-wien#webpage"
+}

@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://realestateheritage.at/#website",
+  "url": "https://realestateheritage.at/",
+  "name": "Real Estate Heritage",
+  "inLanguage": [
+    "de-AT",
+    "en"
+  ],
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  }
+}

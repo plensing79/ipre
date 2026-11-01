@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://realestateheritage.at/#paul-lensing",
+  "name": "Paul Lensing",
+  "honorificPrefix": "Dipl.-Ing.",
+  "honorificSuffix": "MSc, MRICS",
+  "jobTitle": "Gründer",
+  "worksFor": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "url": "https://realestateheritage.at/ueber-uns",
+  "alumniOf": [
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Technische Universität Wien"
+    },
+    {
+      "@type": "CollegeOrUniversity",
+      "name": "Donau-Universität Krems"
+    }
+  ],
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Royal Institution of Chartered Surveyors (RICS)"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/humanistischer-kapitalismus#article",
+  "headline": "Humanistischer Kapitalismus in der Immobilienbranche",
+  "description": "Wie Immobilien wirtschaftliche, soziale und ökologische Ziele verbinden: Sanierung, Wohnmodelle, Beteiligung und Impact Investing.",
+  "image": [
+    "https://realestateheritage.at/img/humanismus.webp"
+  ],
+  "datePublished": "2025-07-01",
+  "dateModified": "2025-07-01",
+  "inLanguage": "de-AT",
+  "articleSection": "Haltung",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/humanistischer-kapitalismus#webpage"
+}

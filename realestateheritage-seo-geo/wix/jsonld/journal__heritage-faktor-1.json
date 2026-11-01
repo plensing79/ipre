@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/heritage-faktor#article",
+  "headline": "Der „Heritage-Faktor“: Warum Altbau mehr als nur Nostalgie ist",
+  "description": "Warum Altbau mehr als Nostalgie ist: wie Lage und Balkon zusammenwirken und warum der Preis nicht linear mit der Wohnungsgröße steigt.",
+  "image": [
+    "https://realestateheritage.at/img/heritage-faktor.webp"
+  ],
+  "datePublished": "2026-02-09",
+  "dateModified": "2026-02-09",
+  "inLanguage": "de-AT",
+  "articleSection": "Bewertung",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/heritage-faktor#webpage"
+}

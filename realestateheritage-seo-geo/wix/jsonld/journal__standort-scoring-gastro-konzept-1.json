@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/standort-scoring-gastro-konzept#article",
+  "headline": "Expansionstool für ein Fast-Casual-Gastro-Konzept: Standortentscheidungen mit Daten und KI",
+  "description": "Wo zuerst eröffnen, wo danach? Gewichtetes Scoring für fünf Kandidaten in Wien, gestaffelte Eröffnungsreihenfolge und Zehn-Jahres-Modell.",
+  "image": [
+    "https://realestateheritage.at/img/ai-map.webp"
+  ],
+  "datePublished": "2026-10-18",
+  "dateModified": "2026-10-18",
+  "inLanguage": "de-AT",
+  "articleSection": "AI",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/standort-scoring-gastro-konzept#webpage"
+}

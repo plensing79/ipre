@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/journal/vitruvlens#article",
+  "headline": "VitruvLens: Kompaktheit, Sondenfeld und Wiederaufbauwert aus Geodaten",
+  "description": "VitruvLens berechnet aus Geodaten die Kompaktheit eines Gebäudes, die Eignung für Erdwärmesonden und den Wiederaufbauwert – zuerst für Wien.",
+  "image": [
+    "https://realestateheritage.at/img/ai-lc.webp"
+  ],
+  "datePublished": "2026-10-17",
+  "dateModified": "2026-10-17",
+  "inLanguage": "de-AT",
+  "articleSection": "AI",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/vitruvlens#webpage"
+}

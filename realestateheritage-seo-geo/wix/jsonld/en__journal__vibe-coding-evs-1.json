@@ -1,0 +1,21 @@
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://realestateheritage.at/en/journal/vibe-coding-evs#article",
+  "headline": "EVS valuation app: vibe coding and the biggest transformation since Excel",
+  "description": "How a valuer uses vibe coding to build a valuation app based on the European Valuation Standards – shown live at the TEGoVA conference in Vienna.",
+  "image": [
+    "https://realestateheritage.at/img/ai-evs.webp"
+  ],
+  "datePublished": "2026-10-18",
+  "dateModified": "2026-10-18",
+  "inLanguage": "en",
+  "articleSection": "AI",
+  "author": {
+    "@id": "https://realestateheritage.at/#paul-lensing"
+  },
+  "publisher": {
+    "@id": "https://realestateheritage.at/#organization"
+  },
+  "mainEntityOfPage": "https://realestateheritage.at/en/journal/vibe-coding-evs#webpage"
+}
