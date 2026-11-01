@@ -1,14 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Vorlage: Pfade an die tatsächlichen URLs anpassen, lastmod bei jeder inhaltlichen Änderung aktualisieren. -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://realestateheritage.at/</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/leistungen</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/ai</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/ueber-uns</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/journal</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/kontakt</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/impressum</loc><lastmod>2026-11-01</lastmod></url>
-  <url><loc>https://realestateheritage.at/datenschutz</loc><lastmod>2026-11-01</lastmod></url>
-  <!-- Jeder Journal-Artikel bekommt einen eigenen Eintrag: -->
-  <!-- <url><loc>https://realestateheritage.at/journal/SLUG</loc><lastmod>YYYY-MM-DD</lastmod></url> -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://realestateheritage.at/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/leistungen</loc>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/ai</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/ai"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/ai"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/ai"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/ueber-uns</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/ueber-uns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/ueber-uns"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal</loc>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/vibe-coding-evs</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/journal/vibe-coding-evs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/journal/vibe-coding-evs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/journal/vibe-coding-evs"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/powerprompts</loc>
+    <lastmod>2026-10-18</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/standort-scoring-gastro-konzept</loc>
+    <lastmod>2026-10-18</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/vier-quadranten-modell-wien</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/vitruvlens</loc>
+    <lastmod>2026-10-17</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/heritage-faktor</loc>
+    <lastmod>2026-02-09</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/drei-stufen-esg</loc>
+    <lastmod>2025-08-11</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/kohlmarkt</loc>
+    <lastmod>2025-07-01</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/humanistischer-kapitalismus</loc>
+    <lastmod>2025-07-01</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/journal/entwicklung-bestandsimmobilien</loc>
+    <lastmod>2025-02-04</lastmod>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/en/</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/en/ai</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/ai"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/ai"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/ai"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/ueber-uns"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/about"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/ueber-uns"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/en/journal/vibe-coding-evs</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://realestateheritage.at/journal/vibe-coding-evs"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://realestateheritage.at/en/journal/vibe-coding-evs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://realestateheritage.at/journal/vibe-coding-evs"/>
+  </url>
+  <url>
+    <loc>https://realestateheritage.at/impressum</loc>
+  </url>
 </urlset>

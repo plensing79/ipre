@@ -1,23 +1,37 @@
-# Real Estate Heritage AM × AI
+# Real Estate Heritage
 
-> Wiener Beratung für Asset Management von Bestands- und Altbauimmobilien, verbunden mit datenbasierter Analyse und künstlicher Intelligenz. Gegründet von Paul Lensing (Dipl.-Ing., MSc, MRICS) und Lisa Gasteiger-Rabenstein. Sitz: Himmelpfortgasse 11/14, 1010 Wien, Österreich. Claim: „Tradition bewahren. Zukunft bauen.“
+> Heritage Real Estate Asset Management aus Wien: strategisches Asset Management, Architektur und Transaktion für historische und schutzwürdige Immobilien, ergänzt um eigene datengestützte KI-Werkzeuge. Gegründet von Paul Lensing (Dipl.-Ing., MSc, MRICS) und Lisa Gasteiger-Rabenstein. Himmelpfortgasse 11/14, 1010 Wien.
 
-Real Estate Heritage berät Eigentümer:innen, Family Offices, Stiftungen und Investoren zu historischen und bestehenden Immobilien – vor allem Wiener Altbau und Zinshäuser. Der Ansatz verbindet klassisches Immobilien-Asset-Management und Bewertung mit Geodaten, Standort-Scoring und KI-gestützten Werkzeugen.
+Real Estate Heritage ist aus Schlossseiten (schlossseiten.at), einer Online-Plattform und einem Magazin über österreichische Schlösser, hervorgegangen. Die Beratung orientiert sich an den Empfehlungen der RICS und richtet sich an Eigentümer:innen und Investoren historischer und bestehender Immobilien. Grundsatz: KI liefert Grundlagen, Urteil und Verantwortung bleiben bei erfahrenen Fachleuten.
 
-## Kernseiten
-- [Strategie (Startseite)](https://realestateheritage.at/): Positionierung, Ansatz Heritage × Intelligence
-- [Leistungen](https://realestateheritage.at/leistungen): Asset Management, Bewertung, Bestandsentwicklung, AI-Strategie
-- [AI – Case Studies](https://realestateheritage.at/ai): VitruvLens, Vier-Quadranten-Modell Wien, Standort-Scoring, EVS-Bewertungs-App
-- [Über uns](https://realestateheritage.at/ueber-uns): Gründer:innen, Qualifikationen, Haltung
-- [Journal](https://realestateheritage.at/journal): Fachartikel zu AI, ESG, Bewertung, Markt, Bestand
-- [Kontakt](https://realestateheritage.at/kontakt)
+## Leistungen
+- [Strategisches Asset Management & ESG](https://realestateheritage.at/leistungen): Investmentstrategie und Maßnahmenplanung für Objekt oder Portfolio, Potenzialrating HREAM, laufendes Monitoring
+- [Architektur & Immobilienmarketing](https://realestateheritage.at/leistungen): Umbau, Erweiterung und Umnutzung im historischen Kontext, Vermarktung besonderer Objekte
+- [Wirtschaftliche Steuerung & Transaktion](https://realestateheritage.at/leistungen): Businessplan, Controlling, Ankauf, Vermietung, Verkauf, Standortberatung mit eigenem Scoring
+- [KI-Werkzeuge nach Maß und AI-Leadership-Workshops](https://realestateheritage.at/ai)
 
-## Werkzeuge und Methoden
-- VitruvLens: Geodaten-Analyse für Liegenschaften (u. a. Grundstücksdaten, Sondenfeld für Erdwärme, Wiederaufbauwert)
-- Vier-Quadranten-Modell Wien: Einordnung von Wiener Teilmärkten nach Lage- und Objektqualität
-- Standort-Scoring: datenbasierte Standortbewertung für Filialkonzepte (z. B. Fast-Casual-Gastronomie)
-- EVS-Bewertungs-App: digitale Unterstützung für Immobilienbewertungen
+## Eigene KI-Werkzeuge
+- [VitruvLens](https://realestateheritage.at/journal/vitruvlens): berechnet aus Geodaten die charakteristische Länge (Kompaktheit), die Eignung für ein Erdwärme-Sondenfeld und den Wiederaufbauwert von Gebäuden; Start in Wien
+- [Vier-Quadranten-Modell Wien](https://realestateheritage.at/journal/vier-quadranten-modell-wien): interaktives Szenario-Modell des Wiener Wohnungsmarkts nach DiPasquale und Wheaton
+- [Standort-Scoring für ein Fast-Casual-Gastro-Konzept](https://realestateheritage.at/journal/standort-scoring-gastro-konzept): gewichtete Scoring-Matrix und gestaffelte Eröffnungsreihenfolge
+- [EVS-Bewertungs-App](https://realestateheritage.at/journal/vibe-coding-evs): Bewertungs-App nach den European Valuation Standards, live gebaut auf der TEGoVA-Konferenz in Wien
 
-## Optional
+## Team
+- [Paul Lensing](https://realestateheritage.at/ueber-uns): Dipl.-Ing. (Architektur, TU Wien), MSc (Donau-Universität Krems), MRICS; über 20 Jahre institutionelle Immobilienerfahrung in Österreich, Deutschland sowie Zentral- und Osteuropa; Lehrender an der TU Wien; Mitautor von „KI ist Chefsache“
+- [Lisa Gasteiger-Rabenstein](https://realestateheritage.at/ueber-uns): Gründerin und Herausgeberin von Schlossseiten; Schwerpunkt historische Architektur, Medien und Vermarktung besonderer Objekte
+
+## Journal
+- [Alle Beiträge](https://realestateheritage.at/journal): Bestand, Markt, ESG, Bewertung und KI in der Immobilienwirtschaft
+- [Der Heritage-Faktor](https://realestateheritage.at/journal/heritage-faktor)
+- [Die drei Stufen von ESG im Immobiliensektor](https://realestateheritage.at/journal/drei-stufen-esg)
+- [Die Entwicklung von Bestandsimmobilien](https://realestateheritage.at/journal/entwicklung-bestandsimmobilien)
+- [100 Powerprompts](https://realestateheritage.at/journal/powerprompts)
+
+## Kontakt
+- E-Mail: mail@realestateheritage.at
+- Telefon: +43 676 91 96 922
+- Adresse: Himmelpfortgasse 11/14, 1010 Wien, Österreich
 - [Impressum](https://realestateheritage.at/impressum)
-- [Datenschutz](https://realestateheritage.at/datenschutz)
+
+## English
+- [Home](https://realestateheritage.at/en/), [AI case studies](https://realestateheritage.at/en/ai), [About us](https://realestateheritage.at/en/about)

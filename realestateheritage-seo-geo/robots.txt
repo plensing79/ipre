@@ -1,38 +1,26 @@
 # robots.txt – realestateheritage.at
-# Ziel: klassische Suchmaschinen UND KI-Such-/Antwortsysteme ausdrücklich zulassen (GEO).
+# Alle Suchmaschinen und KI-Assistenten dürfen lesen.
+# Hinweis: Solange die Seiten <meta name="robots" content="noindex, nofollow"> tragen,
+# erscheint trotzdem nichts in Google oder Bing. Das Meta-Tag entfernen Sie zum Go-live.
 
 User-agent: *
 Allow: /
-Disallow: /api/
-Disallow: /*?preview=
-Disallow: /*?utm_
 
-# --- KI-Suche & Antwortmaschinen (Zitierbarkeit in ChatGPT, Claude, Perplexity, Gemini, Copilot) ---
+# KI-Suche und Assistenten (lesen Seiten, um Fragen zu beantworten und Quellen zu verlinken)
 User-agent: OAI-SearchBot
-Allow: /
 User-agent: ChatGPT-User
-Allow: /
-User-agent: GPTBot
-Allow: /
 User-agent: Claude-SearchBot
-Allow: /
 User-agent: Claude-User
-Allow: /
-User-agent: ClaudeBot
-Allow: /
 User-agent: PerplexityBot
-Allow: /
 User-agent: Perplexity-User
 Allow: /
+
+# KI-Training. Wer Inhalte nicht für das Training von Modellen freigeben möchte,
+# ändert die folgende Zeile auf "Disallow: /". Die KI-Suche oben bleibt davon unberührt.
+User-agent: GPTBot
+User-agent: ClaudeBot
 User-agent: Google-Extended
-Allow: /
 User-agent: Applebot-Extended
 Allow: /
-User-agent: Bingbot
-Allow: /
-
-# Hinweis: Wer Inhalte nicht für KI-TRAINING freigeben will, aber in KI-SUCHE erscheinen möchte,
-# setzt GPTBot, ClaudeBot, Google-Extended, Applebot-Extended auf "Disallow: /"
-# und lässt OAI-SearchBot, Claude-SearchBot, PerplexityBot erlaubt.
 
 Sitemap: https://realestateheritage.at/sitemap.xml
