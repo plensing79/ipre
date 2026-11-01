@@ -1,0 +1,23 @@
+# Real Estate Heritage AM × AI
+
+> Wiener Beratung für Asset Management von Bestands- und Altbauimmobilien, verbunden mit datenbasierter Analyse und künstlicher Intelligenz. Gegründet von Paul Lensing (Dipl.-Ing., MSc, MRICS) und Lisa Gasteiger-Rabenstein. Sitz: Himmelpfortgasse 11/14, 1010 Wien, Österreich. Claim: „Tradition bewahren. Zukunft bauen.“
+
+Real Estate Heritage berät Eigentümer:innen, Family Offices, Stiftungen und Investoren zu historischen und bestehenden Immobilien – vor allem Wiener Altbau und Zinshäuser. Der Ansatz verbindet klassisches Immobilien-Asset-Management und Bewertung mit Geodaten, Standort-Scoring und KI-gestützten Werkzeugen.
+
+## Kernseiten
+- [Strategie (Startseite)](https://realestateheritage.at/): Positionierung, Ansatz Heritage × Intelligence
+- [Leistungen](https://realestateheritage.at/leistungen): Asset Management, Bewertung, Bestandsentwicklung, AI-Strategie
+- [AI – Case Studies](https://realestateheritage.at/ai): VitruvLens, Vier-Quadranten-Modell Wien, Standort-Scoring, EVS-Bewertungs-App
+- [Über uns](https://realestateheritage.at/ueber-uns): Gründer:innen, Qualifikationen, Haltung
+- [Journal](https://realestateheritage.at/journal): Fachartikel zu AI, ESG, Bewertung, Markt, Bestand
+- [Kontakt](https://realestateheritage.at/kontakt)
+
+## Werkzeuge und Methoden
+- VitruvLens: Geodaten-Analyse für Liegenschaften (u. a. Grundstücksdaten, Sondenfeld für Erdwärme, Wiederaufbauwert)
+- Vier-Quadranten-Modell Wien: Einordnung von Wiener Teilmärkten nach Lage- und Objektqualität
+- Standort-Scoring: datenbasierte Standortbewertung für Filialkonzepte (z. B. Fast-Casual-Gastronomie)
+- EVS-Bewertungs-App: digitale Unterstützung für Immobilienbewertungen
+
+## Optional
+- [Impressum](https://realestateheritage.at/impressum)
+- [Datenschutz](https://realestateheritage.at/datenschutz)

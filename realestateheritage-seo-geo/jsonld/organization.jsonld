@@ -1,0 +1,88 @@
+<!-- Auf JEDER Seite im <head> einbinden. Alle Felder mit "TODO" vor Go-live ersetzen oder entfernen. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://realestateheritage.at/#organization",
+      "name": "Real Estate Heritage",
+      "alternateName": ["Real Estate Heritage AM × AI", "Real Estate Heritage – Heritage × Intelligence"],
+      "slogan": "Tradition bewahren. Zukunft bauen.",
+      "description": "Wiener Beratung für Asset Management von Bestands- und Altbauimmobilien, verbunden mit Geodaten, Standortanalyse und künstlicher Intelligenz.",
+      "url": "https://realestateheritage.at/",
+      "logo": "https://realestateheritage.at/logo.png",
+      "image": "https://realestateheritage.at/og/default.webp",
+      "email": "TODO@realestateheritage.at",
+      "telephone": "TODO +43 ...",
+      "vatID": "TODO ATU...",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Himmelpfortgasse 11/14",
+        "postalCode": "1010",
+        "addressLocality": "Wien",
+        "addressCountry": "AT"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": 48.2058, "longitude": 16.3719 },
+      "areaServed": [
+        { "@type": "City", "name": "Wien" },
+        { "@type": "Country", "name": "Österreich" },
+        { "@type": "Place", "name": "DACH-Region" }
+      ],
+      "knowsAbout": [
+        "Asset Management", "Immobilienbewertung", "Altbau", "Zinshaus", "Bestandsimmobilien",
+        "Denkmalgeschützte Immobilien", "ESG", "Geodaten", "Standortanalyse", "Künstliche Intelligenz in der Immobilienwirtschaft"
+      ],
+      "founder": [
+        { "@id": "https://realestateheritage.at/#paul-lensing" },
+        { "@id": "https://realestateheritage.at/#lisa-gasteiger-rabenstein" }
+      ],
+      "sameAs": [
+        "TODO https://www.linkedin.com/company/...",
+        "TODO Google-Unternehmensprofil-URL"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Leistungen",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Asset Management für Bestands- und Altbauimmobilien" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Immobilienbewertung und Portfolioanalyse" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Geodaten- und Standortanalyse (VitruvLens)" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-Strategie für Immobilienunternehmen" } }
+        ]
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://realestateheritage.at/#paul-lensing",
+      "name": "Paul Lensing",
+      "honorificPrefix": "Dipl.-Ing.",
+      "honorificSuffix": "MSc MRICS",
+      "jobTitle": "Gründer & Geschäftsführer",
+      "worksFor": { "@id": "https://realestateheritage.at/#organization" },
+      "memberOf": { "@type": "Organization", "name": "Royal Institution of Chartered Surveyors (RICS)" },
+      "url": "https://realestateheritage.at/ueber-uns",
+      "image": "https://realestateheritage.at/team/paul-lensing.webp",
+      "sameAs": ["TODO https://www.linkedin.com/in/..."]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://realestateheritage.at/#lisa-gasteiger-rabenstein",
+      "name": "Lisa Gasteiger-Rabenstein",
+      "jobTitle": "Gründerin",
+      "worksFor": { "@id": "https://realestateheritage.at/#organization" },
+      "url": "https://realestateheritage.at/ueber-uns",
+      "image": "https://realestateheritage.at/team/lisa-gasteiger-rabenstein.webp",
+      "sameAs": ["TODO https://www.linkedin.com/in/..."]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://realestateheritage.at/#website",
+      "url": "https://realestateheritage.at/",
+      "name": "Real Estate Heritage",
+      "inLanguage": "de-AT",
+      "publisher": { "@id": "https://realestateheritage.at/#organization" }
+    }
+  ]
+}
+</script>

@@ -1,0 +1,19 @@
+<!-- Auf /leistungen oder der Startseite. Die gleichen Fragen und Antworten MÜSSEN sichtbar auf der Seite stehen. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "Was macht Real Estate Heritage?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Real Estate Heritage ist eine Wiener Beratung für Asset Management von Bestands- und Altbauimmobilien. Wir verbinden klassische Immobilienexpertise mit Geodaten, Standortanalyse und künstlicher Intelligenz, um Werte historischer Gebäude zu sichern und zu entwickeln." } },
+    { "@type": "Question", "name": "Für wen arbeitet Real Estate Heritage?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Für private Eigentümer:innen, Family Offices, Stiftungen, institutionelle Investoren und Immobilienunternehmen mit Bestandsobjekten – vor allem Wiener Zinshäusern und Altbauten." } },
+    { "@type": "Question", "name": "Wie setzt Real Estate Heritage künstliche Intelligenz ein?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Etwa mit VitruvLens für Geodaten-Analysen von Liegenschaften, mit datenbasiertem Standort-Scoring und mit einer App zur Unterstützung von Immobilienbewertungen. KI ergänzt dabei die fachliche Beurteilung, sie ersetzt sie nicht." } },
+    { "@type": "Question", "name": "Welche Qualifikationen haben die Gründer:innen?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Paul Lensing ist Dipl.-Ing., MSc und Mitglied der Royal Institution of Chartered Surveyors (MRICS). Gemeinsam mit Lisa Gasteiger-Rabenstein hat er Real Estate Heritage in Wien gegründet." } },
+    { "@type": "Question", "name": "Wo sitzt Real Estate Heritage?",
+      "acceptedAnswer": { "@type": "Answer", "text": "In der Himmelpfortgasse 11/14, 1010 Wien. Wir beraten in Wien, Österreich und der DACH-Region." } }
+  ]
+}
+</script>

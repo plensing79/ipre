@@ -1,0 +1,18 @@
+<!-- Vorlage für jeden Journal-Artikel. Platzhalter in {{ }} ersetzen. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{TITEL – max. 110 Zeichen}}",
+  "description": "{{META-DESCRIPTION}}",
+  "image": ["https://realestateheritage.at/journal/{{slug}}/cover.webp"],
+  "datePublished": "{{YYYY-MM-DD}}",
+  "dateModified": "{{YYYY-MM-DD}}",
+  "inLanguage": "de-AT",
+  "articleSection": "{{AI | ESG | Bewertung | Markt | Bestand | Haltung}}",
+  "author": { "@id": "https://realestateheritage.at/#paul-lensing" },
+  "publisher": { "@id": "https://realestateheritage.at/#organization" },
+  "mainEntityOfPage": "https://realestateheritage.at/journal/{{slug}}",
+  "about": [{ "@type": "Thing", "name": "{{Hauptthema, z. B. Zinshausbewertung}}" }]
+}
+</script>

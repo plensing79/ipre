@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Vorlage: Pfade an die tatsächlichen URLs anpassen, lastmod bei jeder inhaltlichen Änderung aktualisieren. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://realestateheritage.at/</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/leistungen</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/ai</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/ueber-uns</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/journal</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/kontakt</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/impressum</loc><lastmod>2026-11-01</lastmod></url>
+  <url><loc>https://realestateheritage.at/datenschutz</loc><lastmod>2026-11-01</lastmod></url>
+  <!-- Jeder Journal-Artikel bekommt einen eigenen Eintrag: -->
+  <!-- <url><loc>https://realestateheritage.at/journal/SLUG</loc><lastmod>YYYY-MM-DD</lastmod></url> -->
+</urlset>
